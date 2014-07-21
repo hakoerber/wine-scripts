@@ -12,4 +12,4 @@ export POSTHOOK_NAME="post-hook.bash"
 export PREHOOK_ALL="$(realpath $(dirname "$SCRIPTPATH")/$PREHOOK_NAME)"
 export POSTHOOK_ALL="$(realpath $(dirname "$SCRIPTPATH")/$POSTHOOK_NAME)"
 
-export STARTSCRIPT="$(dirname "$SCRIPTPATH")/start.bash"
+export STARTSCRIPT="$(realpath $(dirname "$SCRIPTPATH")/start.bash)"

@@ -22,11 +22,11 @@ exec_hook() {
     if [[ -x "$hook_path" ]] ; then
         echo "$hook_name found. executing."
         set +e
-        "$hook_path"
+        "$hook_path" || true
         if [[ $? == 127 ]] ; then
             set -e
             echo "$hook_name did exit with code 127. triggering fallback hook."
-            "$fallback_path"
+            "$fallback_path" || true
         fi
         set -e
     else
@@ -38,7 +38,7 @@ exec_hook() {
         echo "Falling back to default $hook_name at $fallback_path"
         if [[ -x "$fallback_path" ]] ; then
             echo "fallback $hook_name found. executing."
-            "$fallback_path"
+            "$fallback_path" || true
         else
             if [[ -e "$fallback_path" ]] ; then
                 echo "fallback $hook_name not executable."
@@ -52,17 +52,12 @@ exec_hook() {
 
 print_exec() {
     echo "$*"
-    $*
+    "$@"
 }
-
-# load application specific information
-source "$1"
-
-#echo "overwriting $INIPATH with $MYINIPATH"
-#cp "$WINEPREFIX/$MYINIPATH" "$WINEPREFIX/$INIPATH"
 
 PREHOOK_SPECIFIC="$APPSCRIPTDIR/$PREHOOK_NAME"
 POSTHOOK_SPECIFIC="$APPSCRIPTDIR/$POSTHOOK_NAME"
+
 
 exec_hook "pre-hook" "$PREHOOK_SPECIFIC" "$PREHOOK_ALL"
 
