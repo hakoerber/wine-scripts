@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-APPNAME="$(basename $(realpath $(dirname ${BASH_SOURCE[0]})/..))"
+mypath=${BASH_SOURCE[0]}
+if [[ -z "$mypath" ]] ; then
+    mypath="$0"
+fi
+
+APPNAME="$(basename $(realpath $(dirname $mypath)/..))"
+
+source "$(dirname $mypath)/../../common/settings.bash"
 
 export APPDIR="$PREFIXROOT/$APPNAME"
 echo "application-specific directory: $APPDIR"
