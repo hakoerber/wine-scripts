@@ -61,6 +61,6 @@ POSTHOOK_SPECIFIC="$APPSCRIPTDIR/$POSTHOOK_NAME"
 
 exec_hook "pre-hook" "$PREHOOK_SPECIFIC" "$PREHOOK_ALL"
 
-print_exec wine $3 "$WINEPREFIX/$2"
+print_exec wine $3 "$WINEPREFIX/$2" "$4"
 
 exec_hook "post-hook" "$POSTHOOK_SPECIFIC" "$POSTHOOK_ALL"

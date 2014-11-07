@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# add application specific commands that shall be executed before starting wine
+# here
+
+# exiting with code 127 triggers the execution of the default hook
+#exit 127
+
+exit 0
